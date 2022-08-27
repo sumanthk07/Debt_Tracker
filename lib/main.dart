@@ -10,6 +10,7 @@ import 'package:loginpagecheck/credit_forms.dart';
 import 'package:loginpagecheck/login_page.dart';
 import 'package:loginpagecheck/signup_page.dart';
 import 'package:loginpagecheck/welcome_page.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -19,11 +20,11 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  final storage=const FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
-  Future<bool>checkLoginStatus() async{
-    String? value =await storage.read(key: "uid");
-    if(value==null){
+  Future<bool> checkLoginStatus() async {
+    String? value = await storage.read(key: "uid");
+    if (value == null) {
       return false;
     }
     return true;
@@ -35,28 +36,28 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-       
         primarySwatch: Colors.blue,
       ),
       home: FutureBuilder(
-        future: checkLoginStatus(),
-        builder: (BuildContext context, AsyncSnapshot<bool>snapshot){
-          if (snapshot.data==false){
-            return LoginScreen();
-          }
-          if(snapshot.connectionState==ConnectionState.waiting){
-            return Container(
+          future: checkLoginStatus(),
+          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+            if (snapshot.data == false) {
+              return LoginScreen();
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Container(
                 color: Color.fromARGB(143, 0, 0, 255),
-               child: Center(child: CircularProgressIndicator(
-              ),),
-            );
-          }
-          return WelcomePage();
-        }),
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
+            return WelcomePage();
+          }),
       routes: {
-        '/loginpge/':(context) => const LoginScreen(),
-        '/register/':(context) =>   const RegistrationScreen(),
-        '/home/':(context)=> const WelcomePage(), 
+        '/loginpge/': (context) => const LoginScreen(),
+        '/register/': (context) => const RegistrationScreen(),
+        '/home/': (context) => const WelcomePage(),
         '/Credit': (context) => Creditpage(),
         '/Debit': (context) => const Debitpage(),
         '/form': (context) => form(),
@@ -64,5 +65,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
