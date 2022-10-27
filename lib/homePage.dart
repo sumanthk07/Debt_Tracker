@@ -1,5 +1,3 @@
-
-
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,14 +17,13 @@ class homePage extends StatefulWidget {
 }
 
 class _homePageState extends State<homePage> {
-
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
-  final storage=const FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
- @override
+  @override
   void initState() {
-    super.initState(); 
+    super.initState();
     FirebaseFirestore.instance
         .collection("users")
         .doc(user?.uid)
@@ -41,69 +38,63 @@ class _homePageState extends State<homePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
-          child: ListView(
-            padding: const EdgeInsets.all(0),
-            children: [
-               DrawerHeader(
-                decoration: const BoxDecoration(
-                  color: Color.fromARGB(143, 0, 0, 255),
-                ), //BoxDecoration
-                child: Image.asset("images/profile.png", fit: BoxFit.contain), 
-              ), 
-              // ListTile(
-              //   leading: const Icon(Icons.person),
-              //   title: const Text(' My Profile '),
-              //   onTap: () {},
-              // ),
-              ListTile(
-                leading: const Icon(Icons.money),
-                title: const Text(' Owed to me '),
-                onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const Debit()));
-                            },
-              ),
-              ListTile(
-                leading: const Icon(Icons.wallet_giftcard),
-                title: const Text(' Owed by me '),
-                onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const Credit()));
-                            },
-              ),
-              // ListTile(
-              //   leading: const Icon(Icons.edit),
-              //   title: const Text(' Edit Profile '),
-              //   onTap: () {
-              //                 Navigator.push(
-              //                     context,
-              //                     MaterialPageRoute(
-              //                         builder: (context) =>
-              //                             const Debitpage()));
-              //               },
-              // ),
-              ListTile(
-                leading: const Icon(Icons.logout),
-                title: const Text('LogOut'),
-                onTap: () {
-                    logout(context);
-                  },
-              ),
-            ],
-          ),
+        child: ListView(
+          padding: const EdgeInsets.all(0),
+          children: [
+            DrawerHeader(
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(143, 0, 0, 255),
+              ), //BoxDecoration
+              child: Image.asset("images/profile.png", fit: BoxFit.contain),
+            ),
+            // ListTile(
+            //   leading: const Icon(Icons.person),
+            //   title: const Text(' My Profile '),
+            //   onTap: () {},
+            // ),
+            ListTile(
+              leading: const Icon(Icons.money),
+              title: const Text(' Owed to me '),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Debit()));
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.wallet_giftcard),
+              title: const Text(' Owed by me '),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Credit()));
+              },
+            ),
+            // ListTile(
+            //   leading: const Icon(Icons.edit),
+            //   title: const Text(' Edit Profile '),
+            //   onTap: () {
+            //                 Navigator.push(
+            //                     context,
+            //                     MaterialPageRoute(
+            //                         builder: (context) =>
+            //                             const Debitpage()));
+            //               },
+            // ),
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('LogOut'),
+              onTap: () {
+                logout(context);
+              },
+            ),
+          ],
         ),
-        appBar: AppBar(
+      ),
+      appBar: AppBar(
         title: const Text("Debt Tracker"),
         backgroundColor: const Color.fromARGB(143, 0, 0, 255),
         centerTitle: true,
       ),
-        body: Center(
+      body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
@@ -143,10 +134,7 @@ class _homePageState extends State<homePage> {
           ),
         ),
       ),
-
-
     );
-    
   }
 
   // the logout function

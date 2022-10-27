@@ -1,4 +1,3 @@
-
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
 
 import 'package:loginpagecheck/models/user_model.dart';
@@ -17,10 +16,9 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
-  
+
   // string for displaying the error Message
   String? errorMessage;
-
 
   // our form key
   final _formKey = GlobalKey<FormState>();
@@ -192,7 +190,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color.fromARGB(143, 0, 0, 255)),
+          icon: const Icon(Icons.arrow_back,
+              color: Color.fromARGB(143, 0, 0, 255)),
           onPressed: () {
             // passing this to our root
             Navigator.of(context).pop();
@@ -239,6 +238,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       ),
     );
   }
+
   void signUp(String email, String password) async {
     if (_formKey.currentState!.validate()) {
       try {
@@ -248,7 +248,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             .catchError((e) {
           Fluttertoast.showToast(msg: e!.message);
           Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const WelcomePage()));
+              MaterialPageRoute(builder: (context) => const WelcomePage()));
         });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {
@@ -274,10 +274,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             errorMessage = "An undefined Error happened.";
         }
         Fluttertoast.showToast(msg: errorMessage!);
-        
       }
     }
   }
+
   postDetailsToFirestore() async {
     // calling our firestore
     // calling our user model
